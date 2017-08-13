@@ -1,0 +1,26 @@
+{
+  "name": "constraints",
+  "version": "0.1.0",
+  "description": "A library of utilities for working with constraints",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "cartesian-product": "^2.1.2"
+  },
+  "watch": {
+    "w": {
+      "patterns": [
+        "*.js",
+        "test"
+      ],
+      "extensions": "js,jsx,hbs,ts,json,css"
+    }
+  },
+  "scripts": {
+    "test": "mocha",
+    "w": "mocha"
+  },
+  "author": "Phil Tomlinson",
+  "license": "ISC",
+  "homepage": "https://xceptionale.com"
+}
