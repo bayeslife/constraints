@@ -1,6 +1,6 @@
 {
   "name": "constraints-engine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A library of utilities for working with constraints",
   "main": "index.js",
   "dependencies": {},
@@ -23,5 +23,5 @@
   },
   "author": "Phil Tomlinson",
   "license": "ISC",
-  "homepage": "https://xceptionale.com"
+  "homepage": "https://github.com/bayeslife/constraints"
 }
