@@ -1,5 +1,5 @@
 {
-  "name": "constraints",
+  "name": "constraints-engine",
   "version": "0.1.0",
   "description": "A library of utilities for working with constraints",
   "main": "index.js",
