@@ -1,11 +1,12 @@
 {
   "name": "constraints-engine",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A library of utilities for working with constraints",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "cartesian-product": "^2.1.2"
+  },
   "devDependencies": {
-    "cartesian-product": "^2.1.2",
     "mocha": "^3.5.0"
   },
   "watch": {
