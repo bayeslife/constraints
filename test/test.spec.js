@@ -61,10 +61,23 @@ var tripleConstraint = doubleConstraint.concat([
   }
 ]);
 
-describe('Given a constraint engine', function() {
-  var constraintEngine;
+describe('Given an explicit constraint engine', function() {  
+  var constraintEngineExplicit
   before(function(){
-     constraintEngine = constraints.compile(singleConstraint);
+     constraintEngineExplicit = constraints.compile(singleConstraint,{explicit: true}); 
+  })
+  describe('When there is a single constraint', function() {
+    it('Then unconstrainted nodes are not consistent ', function() {
+      var result = constraintEngineExplicit.getConsistencyCheck(unconstrained1.id,unconstrained2.id);
+      assert(!result.consistent);
+    });
+  });
+})
+
+describe('Given a constraint engine', function() {
+  var constraintEngine;  
+  before(function(){
+     constraintEngine = constraints.compile(singleConstraint);    
   })
   describe('When there is a single constraint', function() {
       it('Then there is a single constraint indexed', function() {
@@ -124,5 +137,59 @@ describe('Given a constraint engine', function() {
         });
     });
 
+    describe('When there is a single constraint', function() {
+      before(function(){
+        constraintEngine = constraints.compile(singleConstraint);    
+      })
+      describe('and no consistent pair captured', function() {
+        it('Then the nodes are not satisfied', function() {
+           assert(!constraintEngine.getSatisfied(entity1.id));
+           assert(!constraintEngine.getSatisfied(entity2.id));            
+        });
+      });
+      describe('and a consistent pair captured', function() {
+        before(function(){
+          constraintEngine.capture(entity1.id,entity2.id);
+        })
+        it('Then the constrained nodes are satisfied', function() {
+           assert(constraintEngine.getSatisfied(entity1.id));
+           assert(constraintEngine.getSatisfied(entity2.id));            
+        });
+        it('Then the constrained nodes are satisfied', function() {
+          assert(constraintEngine.getSatisfied(entity1.id));
+          assert(constraintEngine.getSatisfied(entity2.id));            
+        });
+        it('Then unspecified nodes are satisfied', function() {
+          assert(constraintEngine.getSatisfied(entity3.id));          
+        });
+      });
+      
+  });
+
+  describe('When there is a double constraint', function() {
+      before(function(){
+        constraintEngine = constraints.compile(doubleConstraint);
+      })
+      describe('and no consistent pair captured', function() {
+        it('Then the nodes are not satisfied', function() {
+           assert(!constraintEngine.getSatisfied(entity1.id));
+           assert(!constraintEngine.getSatisfied(entity2.id));
+           assert(!constraintEngine.getSatisfied(entity3.id));            
+        });
+      });
+      describe('and a consistent pair captured', function() {
+        before(function(){
+          constraintEngine.capture(entity1.id,entity2.id);
+        })
+        it('Then the constrained nodes are satisfied', function() {
+           assert(constraintEngine.getSatisfied(entity1.id));
+           assert(constraintEngine.getSatisfied(entity2.id));            
+        });
+        it('Then unreferenced nodes are not satisfied', function() {          
+          assert(!constraintEngine.getSatisfied(entity3.id));
+        });
+      });
+   
+  });
 
 });

@@ -19,7 +19,7 @@
     }
   },
   "scripts": {
-    "w": "./node_modules/mocha/bin/mocha",
+    "w": "mocha",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "author": "Phil Tomlinson",

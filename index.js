@@ -1,32 +1,25 @@
 
 var cartesian = require('cartesian-product');
 
-var compile = function(constraints={}){
+var compile = function(constraints={},options={explicit: false }){
   var engine = {
+    options,
     constraints,
     constraintIndex: {},
     getConstraintTypes: function() {
       return Object.keys(this.constraintIndex)},
     getConsistencyCheck: function(node1,node2){
-      // var answer = false;
-      //   Object.keys(engine.constraintIndex).forEach(function(constraintType){
-      //     var aconstraint = engine.constraintIndex[constraintType];
-      //     if(!aconstraint.constrainedNodes[node1]&&!aconstraint.constrainedNodes[node2] ){
-      //       answer=true;
-      //     } else {
-      //       var exist = aconstraint.consistent[node1+":"+node2]
-      //       if(exist)
-      //         answer=true;  
-      //     }          
-      //   })
-      //   return answer;
       var answer = {
         consistent: true,
         failedconstraints: []
       }
         Object.keys(engine.constraintIndex).forEach(function(constraintType){
           var aconstraint = engine.constraintIndex[constraintType];
-          if(!aconstraint.constrainedNodes[node1]&&!aconstraint.constrainedNodes[node2] ){            
+          if(!aconstraint.constrainedNodes[node1]&&!aconstraint.constrainedNodes[node2] ){
+            if(options.explicit){
+              answer.consistent = false;
+              answer.failedconstraints.push(constraintType);
+            }          
           } else {
             var exist = aconstraint.consistent[node1+":"+node2]
             if(!exist){
@@ -37,6 +30,42 @@ var compile = function(constraints={}){
         })
         return answer;
     },
+    getSatisfied: function(entity){
+      var answer = true;
+      Object.keys(engine.constraintIndex).forEach(function(constraintType){
+        var aconstraint = engine.constraintIndex[constraintType];
+        if(aconstraint.satisfied[entity]!=undefined && !aconstraint.satisfied[entity])
+          answer=false
+          
+      })
+      return answer;
+    },
+    reset: function(){
+      var constraintTypes = this.getConstraintTypes();
+      var constraintIndex = this.constraintIndex;
+      constraintTypes.forEach(function(constraintType){      
+        var constraint = constraintIndex[constraintType];
+        var sets = Object.keys(constraint);
+        var set1 = Object.keys(constraint[sets[0]]);
+        var set2 = Object.keys(constraint[sets[1]]);        
+        Object.keys(constraint[sets[0]]).forEach(function(node){
+          constraint.satisfied[node]=false;
+        })
+        Object.keys(constraint[sets[1]]).forEach(function(node){
+          constraint.satisfied[node]=false;
+        })
+      })
+    },
+    capture: function(entity1,entity2){
+      var answer = false;
+      Object.keys(engine.constraintIndex).forEach(function(constraintType){
+         var aconstraint = engine.constraintIndex[constraintType];
+         aconstraint.satisfied[entity1]=true;
+         aconstraint.satisfied[entity2]=true;
+      });
+      return answer;
+    },
+    
     init: function(){
       var constraintTypes={};
       constraints.forEach(function(constraint){
@@ -57,7 +86,9 @@ var compile = function(constraints={}){
       Object.keys(constraintTypes).forEach(function(constraintType){
         var consistent = {};
         var constrainedNodes={}
+        var satisfied={}
         engine.constraintIndex[constraintType]={
+          satisfied,
           constrainedNodes,
           consistent
         };
@@ -72,6 +103,8 @@ var compile = function(constraints={}){
           constrainedNodes[pair[1]]=true;
         })
       })
+      this.reset();
+
     }
   };
 

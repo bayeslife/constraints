@@ -63,7 +63,7 @@ var constraintEngine = constraints.compile(singleConstraint);
 
 Then it is possible to query if nodes are consistent according to the constraints.
 ~~~
-var consistencyCheck = constraintEngine.getConsistent("Entity1","Entity2").
+var consistencyCheck = constraintEngine.getConsistencyCheck("Entity1","Entity2").
 ~~~
 
 
