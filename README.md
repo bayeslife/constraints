@@ -2,17 +2,24 @@
 
 ## Terms
 
-Constraint: A Constraint is an entity with 2 related domains of Constrained Entities.  The Constraint expresses which Entities are consistent with each other.
+Constraint: A Constraint is an entity with 2 related domains of Constrained Entities.  The Constraint expresses which Constrained Entities are consistent with each other.
+The Constraint has a Constraint Name.
 
 Constrained Entity: An entity that is related to a Constraint.
+
+Constraint Relationship: A Constraint is linked to Constrained Entities through a specific Constraint Relationship.
 
 Consistency: Entities are consistent if
  - there are no constraints involving both Entities
  - there are no Constraints containing one Constrained Entity and not the other
  - all Constraints allow both nodes to coexist
 
-Inconsistency: Entities are in consistent if
+Inconsistency: Entities are inconsistent if
   - there is one constraints in which either entity is exists but not the other entity.
+
+Selecting: The act of identifying a selected Constrained Entity for each of the Constraint Relationships is referred to as Selecting.
+
+Satisfied Constrained Entity: A Constrained Entity is Satisfied when all the Constraints it is associated with have been Selected.
 
 ## Example constraints
 The diagram belows has a visual representation of constraints.
@@ -26,7 +33,7 @@ Semantically the first constraints has the following meaning.
 
 ![alt text][logo]
 
-[logo]: images/constraints.png "Constraints"
+[logo]: images/constraintmodel.png "Constraints"
 
 
 
