@@ -33,7 +33,7 @@ Semantically the first constraints has the following meaning.
 
 ![alt text][logo]
 
-[logo]: images/constraintmodel.png "Constraints"
+[logo]: images/ConstraintModel.png "Constraints"
 
 
 
