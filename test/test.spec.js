@@ -46,13 +46,13 @@ describe('Given an explicit constraints engine', function() {
   before(function(){
      constraintEngineExplicit = constraints.compile(emergentConstraints,{explicit: true});
   })
-  describe('When there are emergent constraints', function() {  
+  describe('When there are emergent constraints', function() {
     it('Then emergent nodes are consistent ', function() {
-      var result = constraintEngineExplicit.getConsistencyCheck(entity1.id,entity1a.id);      
+      var result = constraintEngineExplicit.getConsistencyCheck(entity1.id,entity1a.id);
       assert(result.consistent);
     });
     it('Then emergent nodes are consistent ', function() {
-      var result = constraintEngineExplicit.getConsistencyCheck(entity2.id,entity2a.id);      
+      var result = constraintEngineExplicit.getConsistencyCheck(entity2.id,entity2a.id);
       assert(result.consistent);
     });
       it('Then non emergent nodes are not consistent ', function() {
@@ -225,7 +225,7 @@ var unchainedConstraint = [
             var result = constraintEngine.getConsistencyCheck(entity1.id,entity2.id);
             assert(result.consistent);
             var result = constraintEngine.getConsistencyCheck(entity3.id,entity2.id);
-            assert(result.consistent);            
+            assert(result.consistent);
         });
     })
     describe('When one chain link is captured', function() {
@@ -239,7 +239,7 @@ var unchainedConstraint = [
           assert(!constraintEngine.getSatisfied(entity2.id).result);
       });
     })
-  }); 
+  });
   describe('Given a constraint engine', function() {
     var constraintEngine;
     before(function(){
@@ -250,7 +250,7 @@ var unchainedConstraint = [
           var result = constraintEngine.getConsistencyCheck(entity1.id,entity4.id);
           assert(!result.consistent);
           var result = constraintEngine.getConsistencyCheck(entity4.id,entity1.id);
-          assert(!result.consistent);            
+          assert(!result.consistent);
       });
     })
   })
