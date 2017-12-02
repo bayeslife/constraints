@@ -1,5 +1,7 @@
 # A module which provides a constraints engine
 
+![Build Status](https://travis-ci.org/bayeslife/constraints.svg?branch=master)
+
 The constraints engine is design to allow the identification of pairs of nodes that satisfy a set of constraints.
 
 A set of choices are defined.
