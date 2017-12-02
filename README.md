@@ -2,6 +2,8 @@
 
 ![Build Status](https://travis-ci.org/bayeslife/constraints.svg?branch=master)
 
+![Dependency Status](https://david-dm.org/bayeslife/constraints.svg)
+
 The constraints engine is design to allow the identification of pairs of nodes that satisfy a set of constraints.
 
 A set of choices are defined.
